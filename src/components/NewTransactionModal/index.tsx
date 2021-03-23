@@ -1,16 +1,8 @@
 import Modal from 'react-modal'
-import { Container } from './styles'
 
-// const customStyles = {
-//   content: {
-//     top: '50%',
-//     left: '50%',
-//     right: 'auto',
-//     bottom: 'auto',
-//     marginRight: '-50%',
-//     transform: 'translate(-50%, -50%)'
-//   }
-// };
+import closeImg from '../../assets/close.svg'
+
+import { Container } from './styles'
 
 // For accessibility porpouse
 Modal.setAppElement('#root')
@@ -34,6 +26,13 @@ export function NewTransactionModal({
       className="react-modal-content"
     // style={customStyles}
     >
+      <button
+        type="button"
+        onClick={onRequestClose}
+        className="react-modal-close"
+      >
+        <img src={closeImg} alt="fechar modal" />
+      </button>
       <Container>
         <h2>Cadastrar transação</h2>
 
