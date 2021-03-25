@@ -12,13 +12,6 @@ import {
   RadioBox
 } from './styles'
 
-interface Transaction {
-  title: string;
-  amount: number;
-  type: string;
-  category: string;
-}
-
 // For accessibility porpouse
 Modal.setAppElement('#root')
 
@@ -38,17 +31,22 @@ export function NewTransactionModal({
 
   const { createTrasaction } = useTransactions()
 
-  function handleCreateNewTransaction(event: FormEvent) {
+  async function handleCreateNewTransaction(event: FormEvent) {
     event.preventDefault()
 
-    const data = {
+    await createTrasaction({
       title,
       amount,
       type,
       category
-    }
+    })
 
-    createTrasaction(data as Transaction)
+    setTitle('')
+    setAmount(0)
+    setType('deposit')
+    setCategory('')
+
+    onRequestClose()
   }
 
   return (
@@ -75,7 +73,6 @@ export function NewTransactionModal({
         />
         <input
           type="number"
-          placeholder="Valor"
           value={amount}
           onChange={event => setAmount(Number(event.target.value))}
         />
